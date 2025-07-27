@@ -10,5 +10,7 @@ How to Run: Had issues here! Not sure about this part...
 
 Dependencies: None
 
+Map Data Format: Comma-Separated-Values (.csv). Each start point (node) has a corresponding end point and weight (in minutes). Ex. A,B,3 
+
 Project developed by Aaron Cloutier
           For MS549 - Data Structures and Algorithms taught by Dr. B
