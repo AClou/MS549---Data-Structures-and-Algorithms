@@ -1,10 +1,17 @@
-# graph class
+#Graph class
 import csv
 
 class Graph:
     #Initialize with empty adjacency list
     def __init__(self):
         self.adjacency_list = {}
+
+    #make the Graph object iterable
+    def __iter__(self):
+        return iter(self.adjacency_list)
+
+    def __getitem__(self, node):
+        return self.adjacency_list[node]
 
     #Add nodes so long as they are not already found in list
     def add_node(self, node):
@@ -34,14 +41,7 @@ class Graph:
             print(f"Unfortunately, an error has occurred: {e}")
 
     def __str__(self):
-        print(f"*** Map Adjacency List ***")
+        print(f"Map Adjacency List")
         for node, neighbors in self.adjacency_list.items():
             neighbor_str = ", ".join([f"({n}, {w})" for n, w in neighbors])
             print(f"{node} : [{neighbor_str}]")
-
-
-#Execution block
-if __name__ == "__main__":
-    map = Graph()
-    map.load_map_from_file('map.csv')
-    map.__str__()
