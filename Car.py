@@ -11,6 +11,7 @@ class Car:
         self.destination = None
         self.route = None
         self.route_time = 0
+        self.assigned_rider = None
 
     def display_info(self):
         print(f"Car {self.id} is currently at {self.location}, and is {self.status}.")
@@ -69,12 +70,12 @@ class Car:
 
            
 
-
+'''
 #Execution Block
 if __name__ == "__main__":
-    '''
-    create car objects with unique values
-    '''
+    
+    #create car objects with unique values
+    
     car1 = Car('CAR-01', 'A')
     car1.display_info()
 
@@ -94,3 +95,4 @@ if __name__ == "__main__":
     car1.calculate_route(destination, city_map)
     car2.calculate_route(destination, city_map)
     car3.calculate_route(destination, city_map)
+'''
