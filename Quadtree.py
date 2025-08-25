@@ -83,6 +83,26 @@ class QuadtreeNode:
         
         return False
 
+    def remove(self, point):
+        #removes the old point from the quadtree
+        if not self.boundary.contains(point):
+            return False
+        
+        if point in self.points:
+            self.points.remove(point)
+            return True
+
+        #if the node is divided, remove from the children nodes
+        if self.divided:
+            return (
+                self.northeast.remove(point) or
+                self.northwest.remove(point) or
+                self.southeast.remove(point) or
+                self.southwest.remove(point)
+            )
+
+        return False
+
     def query(self, point, best_found_point):
         #If this node doesn't have a closer point, stop searching
         if self.boundary.distance_sq_to_point(point) > best_found_point['dist_squared']:
@@ -103,7 +123,8 @@ class QuadtreeNode:
 
             for child in children:
                 child.query(point, best_found_point)
-        return
+        return 
+
 
 class Quadtree:
     #initialize Quadtree class

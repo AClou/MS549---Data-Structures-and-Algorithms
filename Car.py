@@ -7,6 +7,7 @@ class Car:
     def __init__(self, car_id, initial_location):
         self.id = car_id
         self.location = initial_location
+        self.current_node = None
         self.status = 'available'
         self.destination = None
         self.route = None
@@ -48,12 +49,12 @@ class Car:
 
     def calculate_route(self, destination, graph):
 
-        #Assign car's location as the starting_location variable
-        starting_location = self.location
+        #Assign starting location (node) as car's current_node
+        starting_location = self.current_node
 
         #Create distances and predecessors dictionaries using Dijkstra's algorithm
         #passing along the city_map and starting_location
-        distances, predecessors = Car.dijkstras_algorithm(graph, self.location)
+        distances, predecessors = Car.dijkstras_algorithm(graph, self.current_node)
 
         #Find the shortest path to the destination using the 
         #predecessors dictionary and the reconstruct_path method
@@ -64,35 +65,6 @@ class Car:
 
         #Display results
         if self.route_time != math.inf:
-            print(f"\n{self.id} - shortest path from '{starting_location}' to '{destination}': {self.route}, {self.route_time}")
+            print(f"    {self.id} - shortest path from '{starting_location}' to '{destination}': {self.route}, {self.route_time}")
         else:
-            print(f"\n{self.id} - shortest path from '{starting_location}' to '{destination}': None, {self.route_time}")
-
-           
-
-'''
-#Execution Block
-if __name__ == "__main__":
-    
-    #create car objects with unique values
-    
-    car1 = Car('CAR-01', 'A')
-    car1.display_info()
-
-    car2 = Car('CAR-02', 'B')
-    car2.display_info()
-
-    car3 = Car('CAR-03', 'C')
-    car3.display_info()
-
-    #create instance of Graph class called city_map
-    city_map = Graph.Graph()
-    city_map.load_map_from_file('map.csv')
-    city_map.__str__() #display map data so we know it pulled it correctly
-
-    destination = 'D'
-
-    car1.calculate_route(destination, city_map)
-    car2.calculate_route(destination, city_map)
-    car3.calculate_route(destination, city_map)
-'''
+            print(f"    {self.id} - shortest path from '{starting_location}' to '{destination}': None, {self.route_time}")
